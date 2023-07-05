@@ -7,10 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  tests:
-
+  build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
       with:
@@ -28,6 +26,9 @@ jobs:
       run: |
         mkdir -p database
         touch database/database.sqlite
+  tests:
+    runs-on: ubuntu-latest
+    steps:
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_CONNECTION: sqlite
