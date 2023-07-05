@@ -27,6 +27,7 @@ jobs:
         mkdir -p database
         touch database/database.sqlite
   tests:
+    needs: build
     runs-on: ubuntu-latest
     steps:
     - name: Execute tests (Unit and Feature tests) via PHPUnit
