@@ -38,5 +38,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: cd laradock
+      run: cd laradock
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      env:
+          PHP_VERSION: 8.2
+      run: docker compose build
