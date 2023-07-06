@@ -42,9 +42,11 @@ jobs:
       run: pwd
     - name: cd laradock
       run: cd laradock && pwd
+    - name: ls
+      run: ls -a -l
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Build the Docker image
       env:
           PHP_VERSION: 8.2
-      run: docker compose build
+      run: docker-compose --file docker-compose.yml build
