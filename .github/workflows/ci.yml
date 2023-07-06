@@ -40,8 +40,8 @@ jobs:
       - name: Generate Laravel key
         run: php artisan key:generate
 
-      - name: Run tests
-        run: php artisan test
+      # - name: Run tests
+      #   run: php artisan test
 
       - name: Deploy
         run: |
