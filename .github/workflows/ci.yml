@@ -15,7 +15,8 @@ jobs:
 
       - name: Build and deploy
         run: |
-          cp laradock/.env.example laradock/.env
-          docker-compose -f laradock/docker-compose.yml up -d nginx mysql workspace
-          docker-compose exec workspace bash
-          php artisan key:generate
+          cd laradock
+          cp .env.example .env
+          docker-compose up -d nginx mysql workspace
+          docker-compose exec workspace bash -c "cd /var/www && composer install --no-interaction --prefer-dist --optimize-autoloader && php artisan key:generate"
+          
