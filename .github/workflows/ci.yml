@@ -16,7 +16,7 @@ jobs:
     - name: Build and run Laradock containers
       run: |
         cd laradock
-        cp env-example .env
+        cp .env.example .env
         docker-compose up -d nginx mysql redis workspace
 
     - name: Build Docker image
