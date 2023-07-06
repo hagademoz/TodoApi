@@ -29,9 +29,9 @@ jobs:
       - name: Build and run Laradock containers
         run: |
           cd laradock
-          # cp .env.example .env
-          # docker-compose up -d nginx mysql php-fpm
-          docker-compose restart
+          cp .env.example .env
+          docker-compose up -d nginx mysql
+          # docker-compose restart
 
       - name: Set up Laravel dependencies
         run: |
