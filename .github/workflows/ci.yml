@@ -14,8 +14,14 @@ jobs:
       with:
         php-version: '8.2'
     - uses: actions/checkout@v3
-    - name: pwd
+    - name: pwd in
       run: pwd
+    - name: ls -a -l
+      run: ls
+    - name: cd out
+      run: cd ..
+    - name: pwd out
+      run: pwd 
     - name: ls -a -l
       run: ls
 #     - name: Copy .env
