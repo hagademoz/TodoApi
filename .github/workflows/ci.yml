@@ -43,10 +43,12 @@ jobs:
     - name: cd laradock
       run: cd laradock && pwd
     - name: ls
-      run: ls -a -l
+      run: cd laradock && ls -a -l
     - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      run: cd laradock && php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Build the Docker image
       env:
           PHP_VERSION: 8.2
-      run: docker-compose --file docker-compose.yml build
+      run: cd laradock && docker-compose up -d nginx mysql phpmyadmin redis workspace
+    - name: exec
+      run: docker-compose exec workspace bash
