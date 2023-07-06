@@ -32,5 +32,6 @@ jobs:
 
       - name: Build and deploy
         run: |
+          cp laradock/.env.example laradock/.env
           docker-compose -f laradock/docker-compose.yml up -d nginx mysql
           php artisan migrate --force
