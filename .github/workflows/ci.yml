@@ -45,5 +45,5 @@ jobs:
 
       - name: Deploy
         run: |
-          cd /laradock
-          docker-compose exec workspace php artisan migrate --force
+          cd laradock
+          docker-compose exec workspace bash -c "cd /var/www && docker-compose exec workspace php artisan migrate --force"
