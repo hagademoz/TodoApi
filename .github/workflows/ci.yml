@@ -1,4 +1,4 @@
-name: Laravel CI/CD
+name: Laravel CI with LaraDock
 
 on:
   push:
@@ -6,17 +6,25 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Build and deploy
-        run: |
-          cd laradock
-          cp .env.example .env
-          docker-compose up -d nginx mysql workspace
-          docker-compose exec workspace bash -c "cd /var/www && composer install --no-interaction --prefer-dist --optimize-autoloader && php artisan key:generate"
-          
+    - name: Build and run Laradock containers
+      run: |
+        cd laradock
+        cp env-example .env
+        docker-compose up -d nginx mysql redis workspace
+
+    - name: Build Docker image
+      run: |
+        cd laradock
+        docker-compose exec workspace bash -c "cd /var/www && composer install --no-interaction --prefer-dist --optimize-autoloader && php artisan key:generate"
+
+    - name: Stop Laradock containers
+      run: |
+        cd laradock
+        docker-compose stop
