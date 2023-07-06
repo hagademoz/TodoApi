@@ -13,25 +13,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.2
-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
-
-      - name: Copy .env.example to .env
-        run: cp .env.example .env
-
-      - name: Generate application key
-        run: php artisan key:generate
-
-#       - name: Run tests
-#         run: vendor/bin/phpunit
-
       - name: Build and deploy
         run: |
           cp laradock/.env.example laradock/.env
-          docker-compose -f laradock/docker-compose.yml up -d nginx mysql
-          php artisan migrate --force
+          docker-compose -f laradock/docker-compose.yml up -d nginx mysql workspace
+          docker-compose exec workspace bash
+          php artisan key:generate
