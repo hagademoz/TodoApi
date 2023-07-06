@@ -24,6 +24,7 @@ jobs:
       - name: Run database migrations
         run: |
           cd laradock
+          cp .env.example .env
           docker-compose exec workspace php artisan migrate --seed
 
       - name: Stop Laradock services
