@@ -19,10 +19,14 @@ jobs:
       - name: PWD
         run: pwd
         
+      - name: whoami
+        run: whoami
+        
       - name: Start Laradock containers
         run: |
           cd ../laradock
           pwd
+          whoami
           docker compose up -d nginx mysql
           
       - name: Configure Laravel environment
@@ -30,4 +34,5 @@ jobs:
           cp ../laradock/env-example ../laradock/.env
           cd ../laradock
           pwd
+          whoami
           docker compose exec workspace php artisan key:generate
