@@ -31,7 +31,7 @@ jobs:
           
       - name: Configure Laravel environment
         run: |
-          cp ../laradock/env-example ../laradock/.env
+          cp ../laradock/.env.example ../laradock/.env
           cd ../laradock
           pwd
           whoami
