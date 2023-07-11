@@ -32,7 +32,6 @@ jobs:
           docker compose exec workspace bash -c '
             cd TodoApi
             cp .env.example .env
-            php artisan key:generate
           '
           
       - name: Install Composer dependencies
@@ -40,5 +39,13 @@ jobs:
           cd ../laradock
           docker compose exec workspace -c '
             cd TodoApi
-            composer install --no-interaction --prefer-dist --no-dev
+            composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+          '
+          
+      - name: Generate key
+        run: |
+          cd ../laradock
+          docker compose exec workspace -c '
+            cd TodoApi
+            php artisan key:generate
           '
