@@ -37,7 +37,7 @@ jobs:
           cd ../laradock
           docker compose exec -u $(id -u):$(id -u) workspace bash -c '
             cd TodoApi
-            composer install --optimize-autoloader --no-dev
+            composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
           '
           
       - name: Generate key
