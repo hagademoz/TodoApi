@@ -33,6 +33,7 @@ jobs:
           docker compose exec workspace bash -c '
             cd TodoApi
             cp .env.example .env
+            chown test_deploy:test_deploy
           '
           
       - name: Install Composer dependencies
@@ -42,6 +43,7 @@ jobs:
             cd TodoApi
             composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
           '
+          chown -R test_deploy:test_deploy TodoApi/vendor
           
       - name: Generate key
         run: |
