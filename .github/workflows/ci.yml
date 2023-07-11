@@ -28,7 +28,13 @@ jobs:
           pwd
           cp .env.example .env
           echo "12345" | sudo -S docker compose up -d nginx mysql
-          # docker-compose restart
+          
+      - name: Deploy
+        run: |        
+          cd ..
+          cd laradock
+          docker-compose exec workspace bash -c "cd TodoApi"
+          php artisan key:generate
 
 #       - name: Set up Laravel dependencies
 #         run: |
