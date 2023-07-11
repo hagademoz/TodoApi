@@ -37,7 +37,7 @@ jobs:
       - name: Install Composer dependencies
         run: |
           cd ../laradock
-          docker compose exec workspace -c '
+          docker compose exec workspace bash -c '
             cd TodoApi
             composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
           '
@@ -45,7 +45,7 @@ jobs:
       - name: Generate key
         run: |
           cd ../laradock
-          docker compose exec workspace -c '
+          docker compose exec workspace bash -c '
             cd TodoApi
             php artisan key:generate
           '
