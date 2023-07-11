@@ -27,8 +27,7 @@ jobs:
           cd laradock
           pwd
           cp .env.example .env
-          echo "12345"
-          sudo -S docker compose up -d nginx mysql
+          echo "12345" | sudo -S docker compose up -d nginx mysql
           # docker-compose restart
 
 #       - name: Set up Laravel dependencies
