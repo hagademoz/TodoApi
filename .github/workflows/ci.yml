@@ -61,7 +61,7 @@ jobs:
           DB_DATABASE: database/database.sqlite
         run: |
           cd ../laradock
-          docker-compose exec workspace bash -c '
+          docker compose exec workspace bash -c '
             php artisan migrate --force
           '
 
@@ -74,7 +74,7 @@ jobs:
         - name: test
           run: |
             cd ../laradock
-            docker-compose exec workspace bash -c '
+            docker compose exec workspace bash -c '
               php artisan test
             '
 
