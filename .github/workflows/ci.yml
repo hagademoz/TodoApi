@@ -35,4 +35,5 @@ jobs:
           cd ../laradock
           pwd
           whoami
-          docker compose exec workspace php artisan key:generate
+          docker compose exec workspace bash
+          php artisan key:generate
