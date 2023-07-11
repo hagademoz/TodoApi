@@ -34,8 +34,11 @@ jobs:
           
       - name: Install Composer dependencies
         run: |
-          cd ../TodoApi
-          composer install --optimize-autoloader --no-dev
+          cd ../laradock
+          docker compose exec -u $(id -u) workspace bash -c '
+            cd TodoApi
+            composer install --optimize-autoloader --no-dev
+          '
           
       - name: Generate key
         run: |
