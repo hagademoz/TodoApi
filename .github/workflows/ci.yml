@@ -35,4 +35,5 @@ jobs:
           cd ../laradock
           pwd
           whoami
-          docker compose exec workspace bash -c "ls && cd ecommerce-api && ls && php artisan key:generate"
+          docker compose exec workspace bash -c "ls -al"
+          # docker compose exec workspace bash -c "ls && cd ecommerce-api && ls && php artisan key:generate"
