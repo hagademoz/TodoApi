@@ -35,7 +35,7 @@ jobs:
       - name: Install Composer dependencies
         run: |
           cd ../laradock
-          docker compose exec -u $(id -u) workspace bash -c '
+          docker compose exec -u $(id -u):$(id -u) workspace bash -c '
             cd TodoApi
             composer install --optimize-autoloader --no-dev
           '
