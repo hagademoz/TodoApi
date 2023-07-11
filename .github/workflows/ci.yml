@@ -38,7 +38,7 @@ jobs:
       - name: Install Composer dependencies
         run: |
           cd ../laradock
-          docker compose exec workspace bash -c '
+          docker compose exec -u test_deploy workspace bash -c '
             cd TodoApi
             composer install --optimize-autoloader --no-dev
           '
@@ -46,7 +46,7 @@ jobs:
       - name: Generate key
         run: |
           cd ../laradock
-          docker compose exec workspace bash -c '
+          docker compose exec -u test_deploy workspace bash -c '
             cd TodoApi
             php artisan key:generate
           '
@@ -62,7 +62,7 @@ jobs:
           DB_DATABASE: database/database.sqlite
         run: |
           cd ../laradock
-          docker compose exec workspace bash -c '
+          docker compose exec -u test_deploy workspace bash -c '
             cd TodoApi
             php artisan migrate --force
           '
@@ -76,7 +76,7 @@ jobs:
         - name: test
           run: |
             cd ../laradock
-            docker compose exec workspace bash -c '
+            docker compose exec -u test_deploy workspace bash -c '
               cd TodoApi
               php artisan test
             '
