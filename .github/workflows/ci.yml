@@ -33,7 +33,7 @@ jobs:
           docker compose exec workspace bash -c '
             cd TodoApi
             cp .env.example .env
-            chown test_deploy:test_deploy
+            chown test_deploy:test_deploy .env
           '
           
       - name: Install Composer dependencies
