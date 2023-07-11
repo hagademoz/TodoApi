@@ -23,6 +23,8 @@ jobs:
           cp .env.example .env
           
       - name: Start Laradock containers
+        env: 
+          PHP_VERSION: 8.2
         run: |
           cd ../laradock
           docker compose up -d nginx mysql
@@ -36,6 +38,7 @@ jobs:
         run: |
           cd ../laradock
           docker compose exec -u $(id -u):$(id -u) workspace bash -c '
+            php -v
             cd TodoApi
             composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
           '
