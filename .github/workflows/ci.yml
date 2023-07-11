@@ -63,6 +63,7 @@ jobs:
         run: |
           cd ../laradock
           docker compose exec workspace bash -c '
+            cd TodoApi
             php artisan migrate --force
           '
 
@@ -76,6 +77,7 @@ jobs:
           run: |
             cd ../laradock
             docker compose exec workspace bash -c '
+              cd TodoApi
               php artisan test
             '
 
