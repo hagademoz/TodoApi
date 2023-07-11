@@ -36,4 +36,7 @@ jobs:
           pwd
           whoami
           docker compose exec workspace bash
+          ls
+          cd ecommerce-api
+          ls
           php artisan key:generate
