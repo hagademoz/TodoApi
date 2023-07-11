@@ -27,7 +27,7 @@ jobs:
           cd laradock
           pwd
           cp .env.example .env
-          docker-compose up -d nginx mysql
+          docker compose up -d nginx mysql
           # docker-compose restart
 
 #       - name: Set up Laravel dependencies
