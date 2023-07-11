@@ -53,8 +53,12 @@ jobs:
           
       - name: Create Testing Database
         run: |
-          mkdir -p database
-          touch database/database.sqlite
+          cd ../laradock
+          docker compose exec workspace bash -c '
+            cd TodoApi
+            mkdir -p database
+            touch database/database.sqlite
+          '
           
       - name: Migrate Testing database
         env:
