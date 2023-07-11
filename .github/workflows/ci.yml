@@ -22,10 +22,10 @@ jobs:
       - name: Start Laradock containers
         run: |
           cd ../laradock
-          docker-compose up -d nginx mysql
+          docker compose up -d nginx mysql
           
       - name: Configure Laravel environment
         run: |
           cp ../laradock/env-example ../laradock/.env
           cd ../laradock
-          docker-compose exec workspace php artisan key:generate
+          docker compose exec workspace php artisan key:generate
