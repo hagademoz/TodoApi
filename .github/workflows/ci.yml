@@ -49,3 +49,35 @@ jobs:
             cd TodoApi
             php artisan key:generate
           '
+          
+      - name: Create Testing Database
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+          
+      - name: Migrate Testing database
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
+        run: |
+          cd ../laradock
+          docker-compose exec workspace bash -c '
+            php artisan migrate --force
+          '
+
+  test:
+      runs-on: self-hosted
+
+      needs: build
+
+      steps:
+        - name: test
+          run: |
+            cd ../laradock
+            docker-compose exec workspace bash -c '
+              php artisan test
+            '
+
+          
+          
+          
