@@ -16,38 +16,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         
-      - name: pwd
+      - name: PWD
         run: pwd
-
-      - name: Build and run Laradock containers
-        env:
-          PHP_VERSION: 8.2
+        
+      - name: Start Laradock containers
         run: |
-          cd ..
-          cd laradock
-          pwd
-          cp .env.example .env
-          echo "12345" | sudo -S docker compose up -d nginx mysql
+          cd ../laradock
+          docker-compose up -d nginx mysql
           
-      - name: Deploy
-        run: |        
-          cd ..
-          cd laradock
-          docker-compose exec workspace bash -c "cd TodoApi"
-          php artisan key:generate
-
-#       - name: Set up Laravel dependencies
-#         run: |
-#           cp .env.example .env
-#           composer install --no-progress --no-suggest
-
-#       - name: Generate Laravel key
-#         run: php artisan key:generate
-
-      # - name: Run tests
-      #   run: php artisan test
-
-#       - name: Deploy
-#         run: |
-#           cd laradock
-#           docker-compose exec workspace bash -c "php artisan migrate --force"
+      - name: Configure Laravel environment
+        run: |
+          cp ../laradock/env-example ../laradock/.env
+          cd ../laradock
+          docker-compose exec workspace php artisan key:generate
