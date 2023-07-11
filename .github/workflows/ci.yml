@@ -13,38 +13,41 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        
+      - name: pwd
+        run: pwd
 
-      - name: Set up Docker Compose
-        run: |
-          sudo rm /usr/local/bin/docker-compose
-          curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o docker-compose
-          chmod +x docker-compose
-          sudo mv docker-compose /usr/local/bin/
+#       - name: Set up Docker Compose
+#         run: |
+#           sudo rm /usr/local/bin/docker-compose
+#           curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o docker-compose
+#           chmod +x docker-compose
+#           sudo mv docker-compose /usr/local/bin/
 
-      - name: Build and run Laradock containers
-        run: |
-          cd laradock
-          cp .env.example .env
-          docker-compose up -d nginx mysql
-          # docker-compose restart
+#       - name: Build and run Laradock containers
+#         run: |
+#           cd laradock
+#           cp .env.example .env
+#           docker-compose up -d nginx mysql
+#           # docker-compose restart
 
-      - name: Set up Laravel dependencies
-        run: |
-          cp .env.example .env
-          composer install --no-progress --no-suggest
+#       - name: Set up Laravel dependencies
+#         run: |
+#           cp .env.example .env
+#           composer install --no-progress --no-suggest
 
-      - name: Generate Laravel key
-        run: php artisan key:generate
+#       - name: Generate Laravel key
+#         run: php artisan key:generate
 
       # - name: Run tests
       #   run: php artisan test
 
-      - name: Deploy
-        run: |
-          cd laradock
-          docker-compose exec workspace bash -c "php artisan migrate --force"
+#       - name: Deploy
+#         run: |
+#           cd laradock
+#           docker-compose exec workspace bash -c "php artisan migrate --force"
